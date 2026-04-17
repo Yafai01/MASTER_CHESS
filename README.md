@@ -47,4 +47,4 @@ Master Chess: Royal Edition is a premium web application that combines a profess
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
-*Created with ❤️ by Antigravity AI*
+
