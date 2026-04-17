@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Chess: Your Journey Begins</title>
+  <meta name="description" content="Learn chess from beginner to advanced through interactive lessons, puzzles, and gameplay. A story-driven chess learning experience.">
+  <meta name="keywords" content="chess, learn chess, chess tutorial, chess puzzles, chess strategy">
+  <meta name="author" content="Master Chess">
+  <meta name="theme-color" content="#080810">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♚</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ LANDING PAGE ============ -->
+  <section id="landing-page">
+    <!-- Floating background pieces -->
+    <div class="landing-bg-pieces" id="bg-pieces"></div>
+
+    <div class="hero">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Interactive Chess Academy
+      </div>
+
+      <h1>Master Chess</h1>
+
+      <p class="hero-subtitle">
+        Your journey from beginner to grandmaster starts here.<br>
+        Learn through <span class="highlight">interactive lessons</span>, solve puzzles, and battle AI.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary" id="start-journey-btn">
+          <span>♚</span> Start Your Journey
+        </button>
+        <button class="btn-secondary" id="quick-play-btn">
+          <span>⚔</span> Quick Play
+        </button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-value">6</div>
+          <div class="stat-label">Chapters</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">30+</div>
+          <div class="stat-label">Lessons</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">50+</div>
+          <div class="stat-label">Puzzles</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Games</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAIN APPLICATION ============ -->
+  <section id="app-container" class="hidden">
+
+    <!-- Header / Navigation -->
+    <header id="app-header">
+      <div class="header-logo" id="logo-home" data-tooltip="Back to Home">
+        <span class="logo-icon">♚</span>
+        <span>Master Chess</span>
+      </div>
+
+      <nav class="header-nav" id="main-nav">
+        <button class="nav-btn active" data-view="story" id="nav-story">📖 Story</button>
+        <button class="nav-btn" data-view="puzzles" id="nav-puzzles">🧩 Puzzles</button>
+        <button class="nav-btn" data-view="play" id="nav-play">⚔ Play</button>
+        <button class="nav-btn" data-view="progress" id="nav-progress">📊 Progress</button>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn-icon" id="sound-toggle" data-tooltip="Toggle Sound">🔊</button>
+        <button class="btn-icon" id="theme-toggle" data-tooltip="Toggle Theme">🌙</button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app-main">
+
+      <!-- ========== STORY MODE VIEW ========== -->
+      <div id="story-view" class="view active">
+        <!-- Chapter Sidebar -->
+        <div class="chapter-sidebar">
+          <div class="sidebar-title">Chapters</div>
+          <div class="chapter-list" id="chapter-list">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-container" id="lesson-container">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- ========== PUZZLE MODE VIEW ========== -->
+      <div id="puzzles-view" class="view">
+        <div class="puzzle-header">
+          <h2>♟ Chess Puzzles</h2>
+          <div class="puzzle-filters" id="puzzle-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="mate1">Mate in 1</button>
+            <button class="filter-btn" data-filter="mate2">Mate in 2</button>
+            <button class="filter-btn" data-filter="tactic">Tactics</button>
+          </div>
+        </div>
+
+        <div class="puzzle-content">
+          <!-- Puzzle Board -->
+          <div class="board-container" id="puzzle-board-container">
+            <div class="board-info-top" id="puzzle-top-info">
+              <div class="player-info">
+                <div class="player-avatar">♚</div>
+                <div>
+                  <div class="player-name" id="puzzle-opponent-name">Opponent</div>
+                  <div class="player-captured" id="puzzle-opponent-captured"></div>
+                </div>
+              </div>
+            </div>
+            <div class="board-wrapper">
+              <div class="chess-board" id="puzzle-board">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+            <div class="board-info-bottom" id="puzzle-bottom-info">
+              <div class="player-info">
+                <div class="player-avatar">♔</div>
+                <div>
+                  <div class="player-name" id="puzzle-player-name">You</div>
+                  <div class="player-captured" id="puzzle-player-captured"></div>
+                </div>
+              </div>
+            </div>
+            <div class="board-status" id="puzzle-board-status">Find the best move!</div>
+          </div>
+
+          <!-- Puzzle Info Panel -->
+          <div class="puzzle-info-panel" id="puzzle-info-panel">
+            <div class="puzzle-number" id="puzzle-counter">Puzzle 1 / 20</div>
+            <div class="puzzle-title" id="puzzle-title">White to Move</div>
+            <div class="puzzle-objective" id="puzzle-objective">
+              Find the checkmate in one move.
+            </div>
+            <div class="puzzle-difficulty" id="puzzle-difficulty-display">
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Difficulty:</span>
+              <div class="difficulty-stars" id="puzzle-stars"></div>
+            </div>
+
+            <div class="puzzle-hint" id="puzzle-hint">
+              <span>💡</span>
+              <span id="puzzle-hint-text"></span>
+            </div>
+
+            <div class="puzzle-result" id="puzzle-result"></div>
+
+            <div class="puzzle-nav">
+              <button class="btn-secondary btn-sm" id="puzzle-hint-btn">💡 Hint</button>
+              <button class="btn-secondary btn-sm" id="puzzle-retry-btn">🔄 Retry</button>
+              <button class="btn-primary btn-sm" id="puzzle-next-btn">Next →</button>
+            </div>
+
+            <div class="puzzle-stats">
+              <div class="puzzle-stat">
+                <div class="puzzle-stat-value" id="puzzles-solved-count">0</div>
+                <div class="puzzle-stat-label">Solved</div>
+              </div>
+              <div class="puzzle-stat">
+                <div class="puzzle-stat-value" id="puzzles-streak-count">0</div>
+                <div class="puzzle-stat-label">Streak</div>
+              </div>
+              <div class="puzzle-stat">
+                <div class="puzzle-stat-value" id="puzzles-accuracy">0%</div>
+                <div class="puzzle-stat-label">Accuracy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== PLAY MODE VIEW ========== -->
+      <div id="play-view" class="view">
+        <div class="play-header">
+          <h2>⚔ Free Play</h2>
+        </div>
+
+        <div class="play-content">
+          <!-- Play Board -->
+          <div class="board-container" id="play-board-container">
+            <div class="board-info-top" id="play-top-info">
+              <div class="player-info">
+                <div class="player-avatar">🤖</div>
+                <div>
+                  <div class="player-name" id="play-opponent-name">ChessBot</div>
+                  <div class="player-captured" id="play-opponent-captured"></div>
+                </div>
+              </div>
+              <div class="timer-clock" id="timer-black">10:00</div>
+            </div>
+            <div class="board-wrapper">
+              <div class="chess-board" id="play-board">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+            <div class="board-info-bottom" id="play-bottom-info">
+              <div class="player-info">
+                <div class="player-avatar">👤</div>
+                <div>
+                  <div class="player-name" id="play-player-name">You</div>
+                  <div class="player-captured" id="play-player-captured"></div>
+                </div>
+              </div>
+              <div class="timer-clock" id="timer-white">10:00</div>
+            </div>
+            <div class="board-status" id="play-board-status">Your turn - White to move</div>
+            <div class="board-controls">
+              <button class="btn-icon" id="play-flip-btn" data-tooltip="Flip Board">🔄</button>
+              <button class="btn-icon" id="play-undo-btn" data-tooltip="Undo Move">↩</button>
+              <button class="btn-icon" id="play-resign-btn" data-tooltip="Resign">🏳</button>
+            </div>
+          </div>
+
+          <!-- Play Panel -->
+          <div class="play-panel">
+            <div class="play-settings" id="play-settings">
+              <h3 style="font-family: var(--font-display); font-weight: 700;">Game Settings</h3>
+
+              <div class="setting-group">
+                <div class="setting-label">AI Difficulty</div>
+                <div class="setting-options" id="difficulty-options">
+                  <button class="option-btn active" data-difficulty="1">Beginner</button>
+                  <button class="option-btn" data-difficulty="2">Intermediate</button>
+                  <button class="option-btn" data-difficulty="3">Advanced</button>
+                </div>
+              </div>
+
+              <div class="setting-group">
+                <div class="setting-label">Time Control</div>
+                <div class="setting-options" id="time-options">
+                  <button class="option-btn" data-time="0">No Timer</button>
+                  <button class="option-btn" data-time="300">5 min</button>
+                  <button class="option-btn active" data-time="600">10 min</button>
+                  <button class="option-btn" data-time="900">15 min</button>
+                </div>
+              </div>
+
+              <div class="setting-group">
+                <div class="setting-label">Play As</div>
+                <div class="setting-options" id="color-options">
+                  <button class="option-btn active" data-color="w">♔ White</button>
+                  <button class="option-btn" data-color="b">♚ Black</button>
+                  <button class="option-btn" data-color="random">🎲 Random</button>
+                </div>
+              </div>
+
+              <button class="btn-primary" id="new-game-btn" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
+                🎮 New Game
+              </button>
+            </div>
+
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+              <div class="setting-label" style="margin-bottom: 0.5rem;">Move History</div>
+              <div class="move-history" id="move-history">
+                <div style="text-align: center; color: var(--text-muted); padding: 2rem 0; font-size: 0.85rem;">
+                  Start a new game to begin
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== PROGRESS VIEW ========== -->
+      <div id="progress-view" class="view">
+        <div class="progress-header">
+          <h2>📊 Your Progress</h2>
+          <p>Track your chess learning journey</p>
+        </div>
+
+        <div class="progress-overview" id="progress-overview">
+          <!-- Populated by JS -->
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0;">
+          <div class="progress-chapters" id="progress-chapters">
+            <h3>📖 Chapter Progress</h3>
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="leaderboard" id="leaderboard">
+            <h3>🏆 Leaderboard</h3>
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </section>
+
+  <!-- ============ TOAST CONTAINER ============ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/chapters.js"></script>
+  <script src="js/puzzles.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
